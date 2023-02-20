@@ -20,8 +20,11 @@ const app = (0, express_1.default)();
 const port = 3000;
 app.use(express_1.default.json());
 app.post('/API/createLead', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let new_email = req.body.email;
+    let new_phone = req.body.phone;
+    let new_name = req.body.name;
     let phones_list = yield bitrix.contacts.list({ select: ['PHONE'] });
-    //bitrix.contacts.create({NAME: "Test Name", "PHONE": [ { "VALUE": "555888", "VALUE_TYPE": "WORK" } ]}); 
+    bitrix.contacts.create({ NAME: new_name, "PHONE": [{ "VALUE": new_phone, "VALUE_TYPE": "WORK" }] });
     console.log(req.body);
     //console.log(phones_list);
     res.send('Request accepted');
