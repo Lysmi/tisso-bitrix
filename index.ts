@@ -42,14 +42,15 @@ app.post('/API/createLead', async (req, res) => {
     contact_id = (await bitrix.contacts.create(new_contact)).result.toString();
   }
   let new_deal: any = {TITLE: `Сделка от ${new_name}`, CONTACT_ID: contact_id}
-  let add_info = '';
-  if (new_about!=undefined  && new_about != null)
-    add_info+=`Примечание клиента: ${new_about}\n`;
-  if (new_file_url!=undefined  && new_file_url != null) 
+  if (new_about!=undefined  && new_about != null) {
+      new_deal["UF_CRM_1677021513259"] = `Примечание клиента: ${new_about}\n`;  
+  }
+  if (new_file_url!=undefined  && new_file_url != null) {
     new_deal["UF_CRM_1677020834979"] = new_file_url
-  new_deal["COMMENTS"] = add_info;
-  if (new_file_link!=undefined  && new_file_link != null) 
+  }
+  if (new_file_link!=undefined  && new_file_link != null) {
     new_deal["UF_CRM_1677018935301"] = new_file_link
+  }
 
   bitrix.deals.create(new_deal);
   res.send('Request accepted');
@@ -88,15 +89,13 @@ app.post('/API/createFeedback', async (req, res) => {
     contact_id = (await bitrix.contacts.create(new_contact)).result.toString();
   }
   let new_deal: any = {TITLE: `Обратная связь от ${new_name}`, CONTACT_ID: contact_id}
-  let add_info = '';
-  if (new_text!=undefined  && new_text != null)
-    new_text+=`Примечание клиента: ${new_text}\n`;
-  
-  new_deal["COMMENTS"] = add_info;
+  if (new_text!=undefined  && new_text != null) {
+    new_deal["UF_CRM_1677021513259"] = new_text;  
+  }
   new_deal["UF_CRM_1677020612855"] = call_me?1:0;
-  bitrix.deals.create(new_deal);
-  // let deal = await bitrix.deals.get("53");
-  // console.log(deal);
+  // bitrix.deals.create(new_deal);
+  let deal = await bitrix.deals.get("59");
+  console.log(deal);
   res.send('Request accepted');
 })
 
