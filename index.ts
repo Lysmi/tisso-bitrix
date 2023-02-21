@@ -50,7 +50,7 @@ app.post('/API/createLead', async (req, res) => {
   if (new_file_url!=undefined  && new_file_url != null) 
     add_info+=`Файл от клиента: ${new_file_url}\n`;
   
-  new_deal["ADDITIONAL_INFO"] = add_info;
+  new_deal["COMMENTS"] = add_info;
 
   bitrix.deals.create(new_deal);
   res.send('Request accepted');

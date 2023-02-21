@@ -2,6 +2,8 @@ POST http://0.0.0.0:3000/API/createLead
 content-type: application/json
 
 {
-    "Phone": "+323743424",
-    "Name": "Test Int Contact"
+    "phone": "+323743424",
+    "name": "Test Int Contact",
+    "fileLink": "myLing"
+
 }

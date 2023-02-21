@@ -64,7 +64,7 @@ app.post('/API/createLead', (req, res) => __awaiter(void 0, void 0, void 0, func
         add_info += `Ссылка от клиента: ${new_file_link}\n`;
     if (new_file_url != undefined && new_file_url != null)
         add_info += `Файл от клиента: ${new_file_url}\n`;
-    new_deal["ADDITIONAL_INFO"] = add_info;
+    new_deal["COMMENTS"] = add_info;
     bitrix.deals.create(new_deal);
     res.send('Request accepted');
 }));
