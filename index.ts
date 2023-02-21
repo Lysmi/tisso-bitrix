@@ -9,7 +9,7 @@ const port = 3000;
 app.use(express.json());
 
 app.post('/API/createLead', async (req, res) => {
-  console.log(`Request body: ${req.body}`);
+  console.log(req.body);
   let new_email = req.body.Email;
   let new_phone = req.body.Phone;
   let new_name = req.body.Name;

@@ -20,7 +20,7 @@ const app = (0, express_1.default)();
 const port = 3000;
 app.use(express_1.default.json());
 app.post('/API/createLead', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log(`Request body: ${req.body}`);
+    console.log(req.body);
     let new_email = req.body.Email;
     let new_phone = req.body.Phone;
     let new_name = req.body.Name;
