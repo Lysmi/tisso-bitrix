@@ -10,13 +10,13 @@ app.use(express.json());
 
 app.post('/API/createLead', async (req, res) => {
   console.log(req.body);
-  let new_email = req.body.Email;
-  let new_phone = req.body.Phone;
-  let new_name = req.body.Name;
-  let new_last_name = req.body.LastName;
-  let new_about = req.body.About;
-  let new_file_link = req.body.FileLink;
-  let new_file_url = req.body.FileUrl;
+  let new_email = req.body.email;
+  let new_phone = req.body.phone;
+  let new_name = req.body.name;
+  let new_last_name = req.body.lastName;
+  let new_about = req.body.about;
+  let new_file_link = req.body.fileLink;
+  let new_file_url = req.body.fileUrl;
   let phones_list = await bitrix.contacts.list({ select: ['PHONE', 'EMAIL'] });
   
   let contact = phones_list.result.find((val, ind, obj) => {
@@ -33,24 +33,23 @@ app.post('/API/createLead', async (req, res) => {
   let contact_id = contact?.ID;
   if (contact == undefined) {
     let new_contact: any = {NAME: new_name}
-    if (new_email != undefined) 
+    if (new_email != undefined && new_email != null) 
       new_contact["EMAIL"] =  [ { VALUE: new_email, VALUE_TYPE: "WORK" } ];
-    if (new_phone != undefined) 
+    if (new_phone != undefined && new_phone != null) 
       new_contact["PHONE"] =  [ { VALUE: new_phone, VALUE_TYPE: "WORK" } ];
-    if (new_last_name != undefined) 
+    if (new_last_name != undefined && new_last_name != null) 
       new_contact["LAST_NAME"] = new_last_name;
     contact_id = (await bitrix.contacts.create(new_contact)).result.toString();
   }
   let new_deal: any = {TITLE: `Сделка от ${new_name}`, CONTACT_ID: contact_id}
   let add_info = '';
-  if (new_about!=undefined)
+  if (new_about!=undefined  && new_about != null)
     add_info+=`Примечание клиента: ${new_about}\n`;
-  if (new_file_link!=undefined) {
+  if (new_file_link!=undefined  && new_file_link != null) 
     add_info+=`Ссылка от клиента: ${new_file_link}\n`;
-  }
-  if (new_file_url!=undefined) {
+  if (new_file_url!=undefined  && new_file_url != null) 
     add_info+=`Файл от клиента: ${new_file_url}\n`;
-  }
+  
   new_deal["ADDITIONAL_INFO"] = add_info;
 
   bitrix.deals.create(new_deal);
