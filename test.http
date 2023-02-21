@@ -1,9 +1,24 @@
+POST http://0.0.0.0:3000/API/createFeedback
+content-type: application/json
+
+{
+    "phone": "+232323",
+    "name": "Test Int Contact",
+    "callMe": true,
+    "text": "My Text"
+
+}
+
+###
+
 POST http://0.0.0.0:3000/API/createLead
 content-type: application/json
 
 {
-    "phone": "+323743424",
+    "phone": "+232323",
     "name": "Test Int Contact",
-    "fileLink": "myLing"
+    "fileLink": "https://habr.com/ru/post/209436/"
 
 }
+
+###
