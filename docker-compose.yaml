@@ -10,5 +10,4 @@ services:
     container_name: tisso-bitrix-integration
     restart: unless-stopped
     volumes:
-      - .:/home/node/app
-      - ./node_modules:/home/node/app/node_modules
+      - ./:/app
