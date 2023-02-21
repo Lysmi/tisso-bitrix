@@ -20,9 +20,14 @@ const app = (0, express_1.default)();
 const port = 3000;
 app.use(express_1.default.json());
 app.post('/API/createLead', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log(`Request body: ${req.body}`);
     let new_email = req.body.Email;
     let new_phone = req.body.Phone;
     let new_name = req.body.Name;
+    let new_last_name = req.body.LastName;
+    let new_about = req.body.About;
+    let new_file_link = req.body.FileLink;
+    let new_file_url = req.body.FileUrl;
     let phones_list = yield bitrix.contacts.list({ select: ['PHONE', 'EMAIL'] });
     let contact = phones_list.result.find((val, ind, obj) => {
         try {
@@ -47,10 +52,22 @@ app.post('/API/createLead', (req, res) => __awaiter(void 0, void 0, void 0, func
             new_contact["EMAIL"] = [{ VALUE: new_email, VALUE_TYPE: "WORK" }];
         if (new_phone != undefined)
             new_contact["PHONE"] = [{ VALUE: new_phone, VALUE_TYPE: "WORK" }];
+        if (new_last_name != undefined)
+            new_contact["LAST_NAME"] = new_last_name;
         contact_id = (yield bitrix.contacts.create(new_contact)).result.toString();
     }
-    let lead_list = yield bitrix.deals.list();
-    console.log(lead_list);
+    let new_deal = { TITLE: `Сделка от ${new_name}`, CONTACT_ID: contact_id };
+    let add_info = '';
+    if (new_about != undefined)
+        add_info += `Примечание клиента: ${new_about}\n`;
+    if (new_file_link != undefined) {
+        add_info += `Ссылка от клиента: ${new_file_link}\n`;
+    }
+    if (new_file_url != undefined) {
+        add_info += `Файл от клиента: ${new_file_url}\n`;
+    }
+    new_deal["ADDITIONAL_INFO"] = add_info;
+    bitrix.deals.create(new_deal);
     res.send('Request accepted');
 }));
 app.listen(port, () => {

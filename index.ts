@@ -9,6 +9,7 @@ const port = 3000;
 app.use(express.json());
 
 app.post('/API/createLead', async (req, res) => {
+  console.log(`Request body: ${req.body}`);
   let new_email = req.body.Email;
   let new_phone = req.body.Phone;
   let new_name = req.body.Name;
@@ -40,7 +41,6 @@ app.post('/API/createLead', async (req, res) => {
       new_contact["LAST_NAME"] = new_last_name;
     contact_id = (await bitrix.contacts.create(new_contact)).result.toString();
   }
-  let lead_list = await bitrix.deals.list();
   let new_deal: any = {TITLE: `Сделка от ${new_name}`, CONTACT_ID: contact_id}
   let add_info = '';
   if (new_about!=undefined)
@@ -54,7 +54,6 @@ app.post('/API/createLead', async (req, res) => {
   new_deal["ADDITIONAL_INFO"] = add_info;
 
   bitrix.deals.create(new_deal);
-  console.log(lead_list);
   res.send('Request accepted');
 })
 
