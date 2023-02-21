@@ -3,7 +3,7 @@ version: '3'
 services:
   app:
     image: node:18-alpine
-    command: sh -c "yarn install && yarn run dev"
+    command: sh -c "yarn install && node index.js"
     ports:
       - 3000:3000
     working_dir: /app
