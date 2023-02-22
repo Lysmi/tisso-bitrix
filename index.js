@@ -66,6 +66,7 @@ app.post('/API/createLead', (req, res) => __awaiter(void 0, void 0, void 0, func
     if (new_file_link != undefined && new_file_link != null) {
         new_deal["UF_CRM_1677018935301"] = new_file_link;
     }
+    console.log(new_deal);
     bitrix.deals.create(new_deal);
     res.send('Request accepted');
 }));
