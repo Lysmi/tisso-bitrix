@@ -63,7 +63,7 @@ app.post('/API/createLead', (req, res) => __awaiter(void 0, void 0, void 0, func
     console.log(`contact_id second: ${contact_id}`);
     let new_deal = { TITLE: `Сделка от ${new_name}`, CONTACT_ID: contact_id };
     if (new_about != undefined && new_about != null) {
-        new_deal["UF_CRM_1677021513259"] = `Примечание клиента: ${new_about}\n`;
+        new_deal["UF_CRM_1677021513259"] = `${new_about}\n`;
     }
     if (new_file_url != undefined && new_file_url != null) {
         new_deal["UF_CRM_1677020834979"] = new_file_url;
