@@ -9,6 +9,7 @@ const port = 3000;
 app.use(express.json({ limit: '70mb' }));
 
 app.post('/API/createLead', async (req, res) => {
+  console.log('start');
   console.log(req.body);
   console.log('start');
   let new_email = req.body.email;
@@ -68,6 +69,8 @@ app.post('/API/createLead', async (req, res) => {
 
 app.post('/API/createFeedback', async (req, res) => {
   console.log(req.body);
+  console.log('start feedback');
+
   let new_email = req.body.email;
   let new_phone = req.body.phone;
   let new_name = req.body.name;

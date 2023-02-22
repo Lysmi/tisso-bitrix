@@ -20,6 +20,7 @@ const app = (0, express_1.default)();
 const port = 3000;
 app.use(express_1.default.json({ limit: '70mb' }));
 app.post('/API/createLead', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log('start');
     console.log(req.body);
     console.log('start');
     let new_email = req.body.email;
@@ -77,6 +78,7 @@ app.post('/API/createLead', (req, res) => __awaiter(void 0, void 0, void 0, func
 }));
 app.post('/API/createFeedback', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(req.body);
+    console.log('start feedback');
     let new_email = req.body.email;
     let new_phone = req.body.phone;
     let new_name = req.body.name;
