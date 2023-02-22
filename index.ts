@@ -18,7 +18,8 @@ app.post('/API/createLead', async (req, res) => {
   let new_file_link = req.body.fileLink;
   let new_file_url = req.body.fileUrl;
   let phones_list = await bitrix.contacts.list({ select: ['PHONE', 'EMAIL'] });
-  
+  console.log(`phones_list: ${phones_list}`);
+
   let contact = phones_list.result.find((val, ind, obj) => {
       try {
         if (val["PHONE"] != null) {
