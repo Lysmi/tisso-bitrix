@@ -32,6 +32,8 @@ app.post('/API/createLead', async (req, res) => {
   });
 
   let contact_id = contact?.ID;
+  console.log(`contact_id find: ${contact_id}`);
+
   if (contact == undefined) {
     let new_contact: any = {NAME: new_name}
     if (new_email != undefined && new_email != null) 
@@ -42,6 +44,8 @@ app.post('/API/createLead', async (req, res) => {
       new_contact["LAST_NAME"] = new_last_name;
     contact_id = (await bitrix.contacts.create(new_contact)).result.toString();
   }
+  console.log(`contact_id second: ${contact_id}`);
+
   let new_deal: any = {TITLE: `Сделка от ${new_name}`, CONTACT_ID: contact_id}
   if (new_about!=undefined  && new_about != null) {
       new_deal["UF_CRM_1677021513259"] = `Примечание клиента: ${new_about}\n`;  
