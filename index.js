@@ -78,6 +78,7 @@ app.post('/API/createLead', (req, res) => __awaiter(void 0, void 0, void 0, func
 app.post('/API/createFeedback', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log('start feedback');
     console.log(req.body);
+    console.log('start feedback 2');
     let new_email = req.body.email;
     let new_phone = req.body.phone;
     let new_name = req.body.name;

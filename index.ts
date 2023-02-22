@@ -70,6 +70,7 @@ app.post('/API/createFeedback', async (req, res) => {
   console.log('start feedback');
 
   console.log(req.body);
+  console.log('start feedback 2');
 
   let new_email = req.body.email;
   let new_phone = req.body.phone;
