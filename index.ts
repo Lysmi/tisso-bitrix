@@ -77,8 +77,11 @@ app.post('/API/createFeedback', async (req, res) => {
   let new_last_name = req.body.lastName;
   let new_text = req.body.text;
   let call_me = req.body.callMe
+  console.log(`start find contact`);
+
   let phones_list = await bitrix.contacts.list({ select: ['PHONE', 'EMAIL'] });
-  
+  console.log(`phones_list: ${phones_list}`);
+
   let contact = phones_list.result.find((val, ind, obj) => {
       try {
         if (val["PHONE"] != null) {
@@ -90,7 +93,10 @@ app.post('/API/createFeedback', async (req, res) => {
         return false;
       }    catch {return false};
   });
+  
   let contact_id = contact?.ID;
+  console.log(`contact_id find: ${contact_id}`);
+
   if (contact == undefined) {
     let new_contact: any = {NAME: new_name}
     if (new_email != undefined && new_email != null) 
@@ -101,14 +107,15 @@ app.post('/API/createFeedback', async (req, res) => {
       new_contact["LAST_NAME"] = new_last_name;
     contact_id = (await bitrix.contacts.create(new_contact)).result.toString();
   }
+  console.log(`contact_id second: ${contact_id}`);
+
   let new_deal: any = {TITLE: `Обратная связь от ${new_name}`, CONTACT_ID: contact_id}
   if (new_text!=undefined  && new_text != null) {
     new_deal["UF_CRM_1677021513259"] = new_text;  
   }
   new_deal["UF_CRM_1677020612855"] = call_me?1:0;
-  // bitrix.deals.create(new_deal);
-  let deal = await bitrix.deals.get("59");
-  console.log(deal);
+  bitrix.deals.create(new_deal);
+
   res.send('Request accepted');
 })
 
