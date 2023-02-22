@@ -10,6 +10,7 @@ app.use(express.json({ limit: '70mb' }));
 
 app.post('/API/createLead', async (req, res) => {
   console.log(req.body);
+  console.log('start');
   let new_email = req.body.email;
   let new_phone = req.body.phone;
   let new_name = req.body.name;
@@ -17,6 +18,7 @@ app.post('/API/createLead', async (req, res) => {
   let new_about = req.body.about;
   let new_file_link = req.body.fileLink;
   let new_file_url = req.body.fileUrl;
+
   console.log(`start find contact`);
 
   let phones_list = await bitrix.contacts.list({ select: ['PHONE', 'EMAIL'] });
