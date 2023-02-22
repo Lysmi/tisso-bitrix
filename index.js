@@ -18,7 +18,7 @@ const configuration_1 = require("./configuration");
 const bitrix = (0, bitrix_1.default)(configuration_1.bitrix_key);
 const app = (0, express_1.default)();
 const port = 3000;
-app.use(express_1.default.json());
+app.use(express_1.default.json({ limit: '70mb' }));
 app.post('/API/createLead', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(req.body);
     let new_email = req.body.email;

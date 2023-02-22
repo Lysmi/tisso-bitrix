@@ -6,7 +6,7 @@ import { basename } from 'path';
 const bitrix = Bitrix(bitrix_key);
 const app = express();
 const port = 3000;
-app.use(express.json());
+app.use(express.json({ limit: '70mb' }));
 
 app.post('/API/createLead', async (req, res) => {
   console.log(req.body);
