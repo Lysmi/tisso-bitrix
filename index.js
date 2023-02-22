@@ -22,7 +22,6 @@ app.use(express_1.default.json({ limit: '70mb' }));
 app.post('/API/createLead', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log('start');
     console.log(req.body);
-    console.log('start');
     let new_email = req.body.email;
     let new_phone = req.body.phone;
     let new_name = req.body.name;
@@ -77,8 +76,8 @@ app.post('/API/createLead', (req, res) => __awaiter(void 0, void 0, void 0, func
     res.send('Request accepted');
 }));
 app.post('/API/createFeedback', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log(req.body);
     console.log('start feedback');
+    console.log(req.body);
     let new_email = req.body.email;
     let new_phone = req.body.phone;
     let new_name = req.body.name;
