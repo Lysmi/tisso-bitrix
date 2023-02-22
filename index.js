@@ -28,6 +28,7 @@ app.post('/API/createLead', (req, res) => __awaiter(void 0, void 0, void 0, func
     let new_about = req.body.about;
     let new_file_link = req.body.fileLink;
     let new_file_url = req.body.fileUrl;
+    console.log(`start find contact`);
     let phones_list = yield bitrix.contacts.list({ select: ['PHONE', 'EMAIL'] });
     console.log(`phones_list: ${phones_list}`);
     let contact = phones_list.result.find((val, ind, obj) => {
